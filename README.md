@@ -9,7 +9,7 @@ seconds if you have a basic understanding of programming or makefiles.
 ## syntax
 
 Guild is a declarative language. It describes the relationships between files
-- not how to create them. This example demonstrates the simplest build script
+\- not how to create them. This example demonstrates the simplest build script
 possible, which compiles a program `main.c` into the binary `main`:
 ```
 main.c -> main
