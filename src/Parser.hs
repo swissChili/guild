@@ -5,7 +5,7 @@ import Text.Parsec.Char
 import Types
 
 unpaddedIngredient :: GenParser Char st String
-unpaddedIngredient = many1 $ noneOf " ,()\n"
+unpaddedIngredient = many1 $ noneOf " =,()\n"
 
 ingredientParser :: GenParser Char st String
 ingredientParser = (char ' ' >> unpaddedIngredient) <|> unpaddedIngredient
@@ -41,10 +41,19 @@ targetParser = do
   sourceType <- sourceTypeParser <|> unknownSourceType
   return $ Recipe target (ingredient : rest) sourceType
 
+varParser :: GenParser Char st Recipe
+varParser = do
+  var <- ingredientParser
+  many $ char ' '
+  char '='
+  binding <- ingredientParser
+  endOfLine
+  return $ Variable var binding
+
+varOrTarget = try varParser <|> try targetParser
+
 toplevelParser :: GenParser Char st [Recipe]
-toplevelParser = do
-  targets <- many1 targetParser
-  return targets
+toplevelParser = many1 varOrTarget
 
 parseGuild :: String -> Either ParseError [Recipe]
 parseGuild i = parse toplevelParser "(unknown)" $ i ++ "\n"

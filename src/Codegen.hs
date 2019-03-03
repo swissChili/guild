@@ -29,6 +29,9 @@ genCompileCommands t s Unknown
 
 genMakefileRec :: [Recipe] -> String -> String
 genMakefileRec [] c = c
+genMakefileRec ((Variable name binding):xs) c = genMakefileRec xs gen
+  where
+    gen = c ++ name ++ " = " ++ binding ++ "\n"
 genMakefileRec ((Recipe target source sourceType):xs) c = genMakefileRec xs gen
   where
     gen = c ++ target ++ " : " ++ sp ++ "\n\t" ++ commands ++ "\n"
