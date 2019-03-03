@@ -1,0 +1,3 @@
+main.c, main.h, foo.h, libfoo.a -> main
+foo.c, foo.h -> foo.o
+foo.o -> libfoo.a
