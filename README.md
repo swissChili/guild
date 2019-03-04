@@ -14,7 +14,7 @@ seconds if you have a basic understanding of programming or makefiles.
 Guild is a declarative language. It describes the relationships between files
 \- not how to create them. This example demonstrates the simplest build script
 possible, which compiles a program `main.c` into the binary `main`:
-```
+```rb
 main.c -> main
 ```
 This script describes the relationship between the two files `main.c` and `main`.
@@ -25,7 +25,7 @@ describe *how* this is to be done: guild will attempt to figure this out for you
 
 More complex build scripts are of course also possible. Here is a slightly more
 complicated one that relies on a statically linked library:
-```
+```rb
 main.c, main.h, foo.h, libfoo.a -> main (c)
 foo.c, foo.h -> foo.o (c)
 foo.o -> libfoo.a
@@ -39,7 +39,7 @@ Variables in guild work pretty much how you'd expect. A name is followed by an
 equal sign (`=`) and a value. These map to variables in the generated Makefile.
 There are several variables that are defined automatically by guild. These can
 be overwritten by setting them in a guildfile. 
-```
+```rb
 CC = gcc
 CFLAGS = -Wall -O3
 ```
@@ -55,6 +55,6 @@ Here are the variables defined by Guild for you:
 Comments are marked by a `#` character and span to the end of the line. There are no
 multi-line comments. These comments will be included in the generated makefile and can
 aid in readability.
-```
+```rb
 # This is a comment
 ```
