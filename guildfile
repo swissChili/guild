@@ -1,6 +1,10 @@
 # Set which C compiler to use
 CC = gcc
 AR = ar
+
+# ok this is epic
+
 main.c, main.h, foo.h, libfoo.a -> main (c)
+
 foo.c, foo.h -> foo.o (c)
 foo.o -> libfoo.a

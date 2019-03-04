@@ -40,6 +40,7 @@ genMakefileRec ((Recipe target source sourceType):xs) c = genMakefileRec xs gen
     sp = intercalate " " source
 genMakefileRec ((Comment label):xs) c = genMakefileRec xs gen
   where gen = c ++ "#" ++ label ++ "\n"
+genMakefileRec ((Ignore):xs) c = genMakefileRec xs c
 
 genMakefile i = genMakefileRec f ""
   where f = rev $ filterVars $ rev i

@@ -8,7 +8,7 @@ unpaddedIngredient :: GenParser Char st String
 unpaddedIngredient = many1 $ noneOf " #=,()\n"
 
 ingredientParser :: GenParser Char st String
-ingredientParser = (char ' ' >> unpaddedIngredient) <|> unpaddedIngredient
+ingredientParser = (many $ char ' ') >> unpaddedIngredient
 
 sourceTypeParser :: GenParser Char st SourceType
 sourceTypeParser = do
@@ -57,12 +57,17 @@ commentParser = do
   char '\n'
   return $ Comment label
 
+ignoreParser :: GenParser Char st Recipe
+ignoreParser = do
+  many1 $ oneOf " \n\t\r"
+  return Ignore
+
 topLevel = try commentParser
+        <|>try ignoreParser
         <|>try varParser
         <|>try targetParser
 
 toplevelParser :: GenParser Char st [Recipe]
 toplevelParser = many1 topLevel
 
-parseGuild :: String -> Either ParseError [Recipe]
-parseGuild i = parse toplevelParser "(unknown)" $ i ++ "\n"
+parseGuild = parse toplevelParser "(guildfile)"
