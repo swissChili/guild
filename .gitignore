@@ -2,3 +2,4 @@
 guild.cabal
 *~
 .vscode/
+dist/
