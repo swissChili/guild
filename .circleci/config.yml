@@ -8,8 +8,8 @@ jobs:
       - checkout
 
       - run:
-        name: Build Project
-        command: stack build
+          name: Build Project
+          command: stack build
       - run:
-        name: Run with existing guildfile
-        command: stack run
+          name: Run with existing guildfile
+          command: stack run
