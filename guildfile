@@ -1,3 +1,4 @@
+# Set which C compiler to use
 CC = gcc
 AR = ar
 main.c, main.h, foo.h, libfoo.a -> main (c)

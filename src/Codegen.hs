@@ -11,10 +11,8 @@ prefix (_:_) [] = False
 prefix (x:xs) (y:ys) = x == y && prefix xs ys
 
 suffix x y = prefix (rev x) (rev y)
-
-varsEq (Recipe _ _ _) _ = False
-varsEq _ (Recipe _ _ _) = False
 varsEq (Variable k1 _) (Variable k2 _) = k1 == k2
+varsEq _ _ = False
 filterVars = nubBy varsEq
 
 genCompileCommands t C
@@ -40,6 +38,8 @@ genMakefileRec ((Recipe target source sourceType):xs) c = genMakefileRec xs gen
     gen = c ++ target ++ " : " ++ sp ++ "\n\t" ++ commands ++ "\n"
     commands = genCompileCommands target sourceType
     sp = intercalate " " source
+genMakefileRec ((Comment label):xs) c = genMakefileRec xs gen
+  where gen = c ++ "#" ++ label ++ "\n"
 
 genMakefile i = genMakefileRec f ""
   where f = rev $ filterVars $ rev i

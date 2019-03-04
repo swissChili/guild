@@ -2,7 +2,7 @@
 
 Guild is a makefile generator - vaguelly similar to CMake in functionality,
 but with simplicity at its forefront. Guild has likely the simplest syntax
-of any build tool, having only 3 syntax rules. You can learn guild in about 30
+of any build tool, having only 4 syntax rules. You can learn guild in about 30
 seconds if you have a basic understanding of programming or makefiles.
 
 ## syntax
@@ -47,3 +47,12 @@ Here are the variables defined by Guild for you:
 - AR (ar): Command used to create archives (.a)
 - CFLAGS (-Wall): Arguments given to the C compiler
 - CPPFLAGS (-Wall): Arguments given to the C++ compiler
+
+### comments
+
+Comments are marked by a `#` character and span to the end of the line. There are no
+multi-line comments. These comments will be included in the generated makefile and can
+aid in readability.
+```
+# This is a comment
+```
