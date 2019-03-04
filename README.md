@@ -1,5 +1,7 @@
 # guild - a modern makefile generator
 
+![Circle CI](https://img.shields.io/circleci/project/github/swissChili/guild.svg)
+
 Guild is a makefile generator - vaguelly similar to CMake in functionality,
 but with simplicity at its forefront. Guild has likely the simplest syntax
 of any build tool, having only 4 syntax rules. You can learn guild in about 30

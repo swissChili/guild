@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: haskell:latest
+
+    steps:
+      - checkout
+
+      - run:
+        name: Build Project
+        command: stack build
+      - run:
+        name: Run with existing guildfile
+        command: stack run
